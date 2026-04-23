@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Smart Technology – Premium Digital Products Nepal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080810;
+    --surface: #0f0f1a;
+    --card: #13131f;
+    --border: #1e1e32;
+    --accent: #c8a97e;
+    --accent2: #7c6fff;
+    --text: #e8e4dc;
+    --muted: #6b6878;
+    --gold: linear-gradient(135deg, #c8a97e, #e8d5a3, #c8a97e);
+    --glow: 0 0 60px rgba(200,169,126,0.15);
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    backdrop-filter: blur(20px);
+    background: rgba(8,8,16,0.8);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    background: var(--gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+  }
+  .logo span { font-style: italic; }
+  nav ul { display: flex; list-style: none; gap: 36px; }
+  nav ul a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  nav ul a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--gold);
+    color: #080810 !important;
+    -webkit-text-fill-color: #080810 !important;
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-weight: 600 !important;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(200,169,126,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(124,111,255,0.08) 0%, transparent 50%);
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(200,169,126,0.08);
+    border: 1px solid rgba(200,169,126,0.25);
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -3px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero h1 em {
+    font-style: italic;
+    background: var(--gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 44px;
+    font-weight: 300;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: #080810;
+    border: none;
+    padding: 16px 36px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(200,169,126,0.4); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 16px 36px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    display: flex; gap: 48px; margin-top: 72px;
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: var(--gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
+
+  /* SCROLLING TICKER */
+  .ticker-wrap {
+    background: rgba(200,169,126,0.06);
+    border-top: 1px solid rgba(200,169,126,0.15);
+    border-bottom: 1px solid rgba(200,169,126,0.15);
+    overflow: hidden;
+    padding: 14px 0;
+    white-space: nowrap;
+  }
+  .ticker {
+    display: inline-block;
+    animation: ticker 25s linear infinite;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* CATEGORIES */
+  .section { padding: 100px 60px; }
+  .section-header { text-align: center; margin-bottom: 60px; }
+  .section-tag {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.15;
+  }
+  .section-title em { font-style: italic; background: var(--gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+  .cats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .cat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.35s;
+    position: relative;
+    overflow: hidden;
+  }
+  .cat-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--gold);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .cat-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--glow); }
+  .cat-icon { font-size: 2.4rem; margin-bottom: 14px; position: relative; }
+  .cat-name { font-weight: 600; font-size: 0.9rem; position: relative; }
+  .cat-count { font-size: 0.75rem; color: var(--muted); margin-top: 4px; position: relative; }
+
+  /* PRODUCTS */
+  .products-section { background: var(--surface); }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .product-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.4s;
+    cursor: pointer;
+    position: relative;
+  }
+  .product-card:hover { transform: translateY(-6px); border-color: rgba(200,169,126,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.5), var(--glow); }
+  .product-thumb {
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .p1 { background: linear-gradient(135deg, #1a1025, #2d1b4e); }
+  .p2 { background: linear-gradient(135deg, #0d1f1a, #1a3a2a); }
+  .p3 { background: linear-gradient(135deg, #1a1015, #3a1a28); }
+  .p4 { background: linear-gradient(135deg, #0d1525, #1a2f4a); }
+  .p5 { background: linear-gradient(135deg, #1a1505, #3a2f10); }
+  .p6 { background: linear-gradient(135deg, #150d1a, #2a1535); }
+
+  .badge-hot {
+    position: absolute; top: 14px; left: 14px;
+    background: #ff4757;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+  }
+  .badge-new {
+    position: absolute; top: 14px; left: 14px;
+    background: var(--accent2);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+  }
+  .product-body { padding: 24px; }
+  .product-cat { font-size: 0.7rem; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .product-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+  .product-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+  .product-footer { display: flex; align-items: center; justify-content: space-between; }
+  .product-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; background: var(--gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .product-old-price { font-size: 0.85rem; color: var(--muted); text-decoration: line-through; margin-left: 6px; }
+  .buy-btn {
+    background: rgba(200,169,126,0.1);
+    border: 1px solid rgba(200,169,126,0.3);
+    color: var(--accent);
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
+  }
+  .buy-btn:hover { background: var(--accent); color: #080810; }
+  .product-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .stars { color: #f5a623; font-size: 0.8rem; }
+  .rating-count { font-size: 0.75rem; color: var(--muted); }
+
+  /* FEATURES */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .feature-item {
+    padding: 36px 32px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: border-color 0.3s;
+  }
+  .feature-item:hover { border-color: rgba(200,169,126,0.3); }
+  .feature-icon { font-size: 2rem; margin-bottom: 20px; }
+  .feature-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
+  .feature-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.7; }
+
+  /* TESTIMONIALS */
+  .testimonials-section { background: var(--surface); }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .testi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 32px;
+  }
+  .testi-quote { font-size: 2rem; color: var(--accent); opacity: 0.4; font-family: 'Playfair Display', serif; margin-bottom: 12px; }
+  .testi-text { font-size: 0.92rem; color: var(--text); line-height: 1.75; margin-bottom: 24px; }
+  .testi-author { display: flex; align-items: center; gap: 14px; }
+  .testi-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; font-family: 'Playfair Display', serif; }
+  .av1 { background: linear-gradient(135deg, #c8a97e, #e8d5a3); color: #080810; }
+  .av2 { background: linear-gradient(135deg, #7c6fff, #a89dff); color: #080810; }
+  .av3 { background: linear-gradient(135deg, #ff6b9d, #ffa8c7); color: #080810; }
+  .testi-name { font-weight: 600; font-size: 0.9rem; }
+  .testi-role { font-size: 0.78rem; color: var(--muted); }
+
+  /* CTA */
+  .cta-section {
+    padding: 100px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(200,169,126,0.08) 0%, transparent 70%);
+  }
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .cta-section h2 em { font-style: italic; background: var(--gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .cta-section p { font-size: 1.05rem; color: var(--muted); max-width: 480px; margin: 0 auto 40px; line-height: 1.7; position: relative; }
+
+  .email-form {
+    display: flex; gap: 12px; max-width: 440px; margin: 0 auto;
+    position: relative;
+  }
+  .email-form input {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 14px 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .email-form input:focus { border-color: var(--accent); }
+  .email-form input::placeholder { color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 60px;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  .footer-brand .logo { font-size: 1.4rem; display: block; margin-bottom: 14px; }
+  .footer-brand p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; max-width: 260px; }
+  .footer-col h4 { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a { text-decoration: none; color: var(--muted); font-size: 0.87rem; transition: color 0.3s; }
+  .footer-col ul li a:hover { color: var(--text); }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: 0.8rem; color: var(--muted); }
+  .payment-icons { display: flex; gap: 8px; }
+  .pay-icon {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    nav ul { display: none; }
+    .section { padding: 70px 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-stats { gap: 24px; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .cta-section { padding: 70px 24px; }
+    footer { padding: 40px 24px; }
+    .email-form { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">IT Smart<span> Technology</span></div>
+  <ul>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Categories</a></li>
+    <li><a href="#">Deals</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="https://wa.me/9779707598185" target="_blank" class="nav-cta">💬 WhatsApp Order</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-badge">🔥 Nepal's Trusted Digital Store</div>
+  <h1>Premium <em>Digital</em><br>Products, <em>Delivered</em><br>Instantly.</h1>
+  <p>Netflix, Spotify, Adobe, Office 365 — sabhi premium subscriptions aur software at unbeatable prices. 100% genuine, instant delivery.</p>
+  <div class="hero-actions">
+    <a href="#products" class="btn-primary">Browse Products →</a>
+    <a href="https://wa.me/9779707598185" target="_blank" class="btn-ghost">💬 Order on WhatsApp</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">50K+</div>
+      <div class="stat-label">Customers</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Products</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">99.9%</div>
+      <div class="stat-label">Uptime</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Support</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+✦ INSTANT DELIVERY &nbsp;&nbsp;&nbsp; ✦ GENUINE PRODUCTS &nbsp;&nbsp;&nbsp; ✦ 24/7 SUPPORT &nbsp;&nbsp;&nbsp; ✦ ESEWA ACCEPTED &nbsp;&nbsp;&nbsp; ✦ KHALTI ACCEPTED &nbsp;&nbsp;&nbsp; ✦ WHATSAPP: +977 9707598185 &nbsp;&nbsp;&nbsp; ✦ 100% MONEY BACK GUARANTEE &nbsp;&nbsp;&nbsp; ✦ INSTANT DELIVERY &nbsp;&nbsp;&nbsp; ✦ GENUINE PRODUCTS &nbsp;&nbsp;&nbsp; ✦ 24/7 SUPPORT &nbsp;&nbsp;&nbsp; ✦ ESEWA ACCEPTED &nbsp;&nbsp;&nbsp; ✦ KHALTI ACCEPTED &nbsp;&nbsp;&nbsp; ✦ WHATSAPP: +977 9707598185 &nbsp;&nbsp;&nbsp; ✦ 100% MONEY BACK GUARANTEE &nbsp;&nbsp;&nbsp;
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">✦ Browse by Category</div>
+    <h2 class="section-title">Every Digital Need,<br><em>One Place.</em></h2>
+  </div>
+  <div class="cats-grid">
+    <div class="cat-card"><div class="cat-icon">🎬</div><div class="cat-name">Streaming</div><div class="cat-count">120+ Products</div></div>
+    <div class="cat-card"><div class="cat-icon">🎵</div><div class="cat-name">Music</div><div class="cat-count">45+ Products</div></div>
+    <div class="cat-card"><div class="cat-icon">💼</div><div class="cat-name">Software</div><div class="cat-count">200+ Products</div></div>
+    <div class="cat-card"><div class="cat-icon">🎮</div><div class="cat-name">Gaming</div><div class="cat-count">80+ Products</div></div>
+    <div class="cat-card"><div class="cat-icon">📚</div><div class="cat-name">Education</div><div class="cat-count">60+ Products</div></div>
+    <div class="cat-card"><div class="cat-icon">🔐</div><div class="cat-name">VPN & Security</div><div class="cat-count">30+ Products</div></div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section products-section" id="products">
+  <div class="section-header">
+    <div class="section-tag">✦ Featured Products</div>
+    <h2 class="section-title">Top <em>Selling</em> This Week</h2>
+  </div>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="product-thumb p1"><div class="badge-hot">🔥 Hot</div>🎬</div>
+      <div class="product-body">
+        <div class="product-cat">Streaming</div>
+        <div class="product-name">Netflix Premium 4K — 1 Month</div>
+        <div class="product-meta"><span class="stars">★★★★★</span><span class="rating-count">(2.4k reviews)</span></div>
+        <div class="product-desc">UHD 4K + HDR, 4 screens simultaneously. Instant account delivery within 5 minutes.</div>
+        <div class="product-footer">
+          <div><span class="product-price">Rs. 299</span><span class="product-old-price">Rs. 599</span></div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-thumb p2"><span class="badge-new">New</span>🎵</div>
+      <div class="product-body">
+        <div class="product-cat">Music</div>
+        <div class="product-name">Spotify Premium — 3 Months</div>
+        <div class="product-meta"><span class="stars">★★★★★</span><span class="rating-count">(1.8k reviews)</span></div>
+        <div class="product-desc">Ad-free music, offline downloads, unlimited skips. Family plan available.</div>
+        <div class="product-footer">
+          <div><span class="product-price">Rs. 349</span><span class="product-old-price">Rs. 699</span></div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-thumb p3"><div class="badge-hot">🔥 Hot</div>💼</div>
+      <div class="product-body">
+        <div class="product-cat">Software</div>
+        <div class="product-name">Microsoft Office 365 — 1 Year</div>
+        <div class="product-meta"><span class="stars">★★★★☆</span><span class="rating-count">(3.1k reviews)</span></div>
+        <div class="product-desc">Word, Excel, PowerPoint, Teams, 1TB OneDrive. 5 devices activation.</div>
+        <div class="product-footer">
+          <div><span class="product-price">Rs. 799</span><span class="product-old-price">Rs. 1,499</span></div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-thumb p4">🎮</div>
+      <div class="product-body">
+        <div class="product-cat">Gaming</div>
+        <div class="product-name">Xbox Game Pass Ultimate — 1 Month</div>
+        <div class="product-meta"><span class="stars">★★★★★</span><span class="rating-count">(980 reviews)</span></div>
+        <div class="product-desc">100+ high-quality games, Xbox Live Gold included. PC + Console access.</div>
+        <div class="product-footer">
+          <div><span class="product-price">Rs. 449</span><span class="product-old-price">Rs. 799</span></div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-thumb p5"><div class="badge-new">New</div>🎨</div>
+      <div class="product-body">
+        <div class="product-cat">Software</div>
+        <div class="product-name">Adobe Creative Cloud — 1 Month</div>
+        <div class="product-meta"><span class="stars">★★★★★</span><span class="rating-count">(1.2k reviews)</span></div>
+        <div class="product-desc">Photoshop, Illustrator, Premiere Pro & 20+ apps. 100GB cloud storage.</div>
+        <div class="product-footer">
+          <div><span class="product-price">Rs. 1,299</span><span class="product-old-price">Rs. 2,499</span></div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-thumb p6">🔐</div>
+      <div class="product-body">
+        <div class="product-cat">VPN & Security</div>
+        <div class="product-name">NordVPN Premium — 1 Year</div>
+        <div class="product-meta"><span class="stars">★★★★☆</span><span class="rating-count">(760 reviews)</span></div>
+        <div class="product-desc">6 devices, 5400+ servers, Double VPN, zero-log policy. Ultra fast speeds.</div>
+        <div class="product-footer">
+          <div><span class="product-price">Rs. 899</span><span class="product-old-price">Rs. 1,799</span></div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">✦ Why Choose Us</div>
+    <h2 class="section-title">Built for <em>Trust.</em></h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-item">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Instant Delivery</div>
+      <div class="feature-desc">Payment ke baad 5 minute ke andar aapke account ya email pe product deliver. Koi waiting nahi.</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🛡️</div>
+      <div class="feature-title">100% Genuine</div>
+      <div class="feature-desc">Saare products official aur verified sources se liye jaate hain. Koi fake, koi risk nahi.</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">💬</div>
+      <div class="feature-title">24/7 Support</div>
+      <div class="feature-desc">Koi bhi problem ho — WhatsApp, Viber, ya live chat pe hum hamesha ready hain aapki help ke liye.</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">💳</div>
+      <div class="feature-title">Easy Payment</div>
+      <div class="feature-desc">eSewa, Khalti, Bank Transfer, IME Pay — Nepal ke sabse popular payment methods accepted.</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🔄</div>
+      <div class="feature-title">Money Back Guarantee</div>
+      <div class="feature-desc">Product kaam nahi kiya? Koi sawal nahi — hum aapke paise wapas karenge ya replace karenge.</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🏷️</div>
+      <div class="feature-title">Best Prices</div>
+      <div class="feature-desc">Nepal mein sabse saste digital products. Kisi bhi competitor se price match guarantee.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials-section">
+  <div class="section-header">
+    <div class="section-tag">✦ Customer Reviews</div>
+    <h2 class="section-title">50,000+ Happy <em>Customers</em></h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="testi-text">Netflix 4K plan ekdam sahi mila, 5 minute mein account aa gaya. Pehle doubts tha lekin ab main har mahine yahi se leta hoon. Highly recommended!</div>
+      <div class="testi-author">
+        <div class="testi-avatar av1">R</div>
+        <div><div class="testi-name">Rajan Shrestha</div><div class="testi-role">Kathmandu • ★★★★★</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="testi-text">Adobe CC milgaya almost half price mein. Customer support ne ek baar issue tha toh bahut jaldi solve kar diya. Ek dum trustworthy site hai yeh.</div>
+      <div class="testi-author">
+        <div class="testi-avatar av2">P</div>
+        <div><div class="testi-name">Priya Tamang</div><div class="testi-role">Pokhara • ★★★★★</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="testi-text">Khalti se payment kiya aur turant confirmation aa gaya. Office 365 bhi genuine hai, abhi 6 mahine se chal raha hai bina kisi problem ke.</div>
+      <div class="testi-author">
+        <div class="testi-avatar av3">S</div>
+        <div><div class="testi-name">Saroj Adhikari</div><div class="testi-role">Chitwan • ★★★★★</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to Go <em>Premium?</em></h2>
+  <p>Newsletter subscribe karein aur sabse pehle exclusive deals aur discounts paayein.</p>
+  <div class="email-form">
+    <input type="email" placeholder="aapka@email.com">
+    <button class="btn-primary">Subscribe →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="logo">IT Smart<span> Technology</span></span>
+      <p>Nepal's trusted digital products store. Premium subscriptions at unbeatable prices. Order on WhatsApp anytime!</p>
+      <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="https://wa.me/9779707598185" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;padding:10px 18px;border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:600;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          +977 9707598185
+        </a>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(200,169,126,0.1);border:1px solid rgba(200,169,126,0.3);color:var(--accent);padding:10px 18px;border-radius:6px;font-size:0.85rem;font-weight:600;">
+          💳 eSewa Accepted
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Products</h4>
+      <ul>
+        <li><a href="#">Streaming</a></li>
+        <li><a href="#">Software</a></li>
+        <li><a href="#">Gaming</a></li>
+        <li><a href="#">Music</a></li>
+        <li><a href="#">Education</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Affiliate</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Refund Policy</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="https://wa.me/9779707598185" target="_blank">💬 WhatsApp Chat</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 IT Smart Technology. All rights reserved. Made with ❤️ in Nepal.</p>
+    <div class="payment-icons">
+      <span class="pay-icon">eSewa</span>
+      <span class="pay-icon">Khalti</span>
+      <span class="pay-icon">IME Pay</span>
+      <span class="pay-icon">Bank</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // Buy button -> WhatsApp
+  document.querySelectorAll('.buy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const product = btn.closest('.product-card').querySelector('.product-name').textContent;
+      const price = btn.closest('.product-card').querySelector('.product-price').textContent;
+      const msg = encodeURIComponent(`Namaste! Mujhe yeh product chahiye:\n\n📦 ${product}\n💰 Price: ${price}\n\nKripya order confirm karein.`);
+      window.open(`https://wa.me/9779707598185?text=${msg}`, '_blank');
+    });
+  });
+
+  // Category hover glow
+  document.querySelectorAll('.cat-card').forEach(card => {
+    card.addEventListener('mouseenter', () => card.style.setProperty('--glow', '0 0 40px rgba(200,169,126,0.25)'));
+    card.addEventListener('mouseleave', () => card.style.removeProperty('--glow'));
+  });
+
+  // Scroll-based fade in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = 'translateY(0)'; }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.product-card, .feature-item, .testi-card, .cat-card').forEach(el => {
+    el.style.opacity = 0;
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, border-color 0.4s, box-shadow 0.4s';
+    observer.observe(el);
+  });
+</script>
+<!-- FLOATING WHATSAPP BUTTON -->
+<a href="https://wa.me/9779707598185?text=Namaste%20IT%20Smart%20Technology!%20Mujhe%20digital%20product%20chahiye." target="_blank" style="
+  position: fixed;
+  bottom: 28px; right: 28px;
+  z-index: 9998;
+  background: #25d366;
+  color: #fff;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 24px rgba(37,211,102,0.5);
+  text-decoration: none;
+  animation: waBounce 2.5s ease-in-out infinite;
+  transition: transform 0.2s;
+" onmouseover="this.style.transform='scale(1.12)'" onmouseout="this.style.transform='scale(1)'">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<style>
+@keyframes waBounce {
+  0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)}
+}
+</style>
+
+</body>
+</html>
